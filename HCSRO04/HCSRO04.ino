@@ -50,9 +50,9 @@ void publishResponse(int content) {
 }
 
 // PINS
-//#define trig 12
-//#define echo 11
-//#define reed 3
+#define trig 13
+#define echo 12
+#define reed 2
 
 // Initialize
 int distArray[5];
@@ -61,9 +61,9 @@ int pingTime;
 int distTotal = 0;
 
 void setup() {
-//  pinMode(trig, OUTPUT);
-//  pinMode(echo, INPUT);
-//  pinMode(reed, INPUT);
+  pinMode(trig, OUTPUT);
+  pinMode(echo, INPUT);
+  pinMode(reed, INPUT);
   Serial.begin(9600);
 
   // MQTT Connection
@@ -78,39 +78,43 @@ void setup() {
 
   Serial.println();
   Serial.println("WiFi connected");
-  MQTT_connect;
+  MQTT_connect();
   Serial.print("IP address: ");
   Serial.println(WiFi.localIP());
 
-//  int switchState = digitalRead(reed);
-//
-//  while (switchState == 1) {
-//    switchState = digitalRead(reed);
-//  }
-//
-//  if (switchState == 0) {
-//    // Calculate the distance
-//    for (int8_t i = 0; i < 5; i++) {
-//      digitalWrite(trig, LOW);
-//      delayMicroseconds(2);
-//      digitalWrite(trig, HIGH);
-//      delayMicroseconds(10);
-//      digitalWrite(trig, LOW);
-//      pingTime = pulseIn(echo, HIGH);
-//      distance = pingTime * (0.034 / 2);
-//      delay(100);
-//      distArray[i] = distance;  // add distance into array
-//    }
-//
-//    for (int i = 0; i < 5; i++) {
-//      distTotal += distArray[i];  // add all distances
-//    }
-//
-//    int finalDistance = distTotal / 5;  // average distances in array
-//    Serial.println(finalDistance);  // print out the distance
-//  }
+  int switchState = digitalRead(reed);
 
-  publishResponse(5);
+  while (switchState == 1) {
+    switchState = digitalRead(reed);
+    delay(1000);
+  }
+
+  if (switchState == 0) {
+    // Calculate the distance
+    for (int8_t i = 0; i < 5; i++) {
+      digitalWrite(trig, LOW);
+      delayMicroseconds(2);
+      digitalWrite(trig, HIGH);
+      delayMicroseconds(10);
+      digitalWrite(trig, LOW);
+      pingTime = pulseIn(echo, HIGH);
+      distance = pingTime * (0.034 / 2);
+      delay(100);
+      distArray[i] = distance;  // add distance into array
+    }
+
+    for (int i = 0; i < 5; i++) {
+      distTotal += distArray[i];  // add all distances
+    }
+
+    int finalDistance = distTotal / 5;  // average distances in array
+    Serial.println(finalDistance);  // print out the distance
+    publishResponse(finalDistance); 
+    }
 }
 
-void loop() {}
+void loop() {
+
+  ESP.deepSleep(99999999);
+  
+  }
