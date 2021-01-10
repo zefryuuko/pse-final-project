@@ -1,6 +1,10 @@
 #include <ESP8266WiFi.h>
 #include <Adafruit_MQTT.h>
 #include <Adafruit_MQTT_Client.h>
+#include <WiFiManager.h>
+
+// WiFi Manager
+WiFiManager wifiManager;
 
 // MQTT
 #define WLAN_SSID "BSD3"
@@ -41,12 +45,15 @@ void MQTT_connect() {
 }
 
 // Publish a response
-void publishResponse(int content) {
-  if(! socket1Pub.publish(content)) {
-    Serial.println(F("Failed to send MsdAcceptedResponse"));
+void publishResponse(String content) {
+  char* buffer = new char[100];
+  content.toCharArray(buffer, 100);
+  if(! socket1Pub.publish(buffer)) {
+    Serial.println(F("Failed to send MsgAcceptedResponse"));
   } else {
     Serial.println(F("MsgAcceptedResponse OK!"));
   }
+  delete[] buffer;
 }
 
 // PINS
@@ -55,15 +62,18 @@ void publishResponse(int content) {
 #define reed 2
 
 // Initialize
-int distArray[5];
-int distance;
-int pingTime;
-int distTotal = 0;
+float distArray[5];
+float distance;
+float pingTime;
+float distTotal = 0.0;
+unsigned int raw = 0;
+float volt = 0.0;
 
 void setup() {
   pinMode(trig, OUTPUT);
   pinMode(echo, INPUT);
   pinMode(reed, INPUT);
+  pinMode(A0, INPUT);  // Built in for battery voltage pin
   Serial.begin(9600);
 
   // MQTT Connection
@@ -107,14 +117,25 @@ void setup() {
       distTotal += distArray[i];  // add all distances
     }
 
-    int finalDistance = distTotal / 5;  // average distances in array
+    // Battery level
+    raw = analogRead(A0);
+    volt = raw/1023.0;
+    volt = volt*4.2;
+
+    float finalDistance = distTotal / 5.0;  // average distances in array
     Serial.println(finalDistance);  // print out the distance
-    publishResponse(finalDistance); 
+    Serial.println(v);  // print out voltage
+
+    String binId = String(WiFi.hostname());
+    String currentHeight = String(finalDistance);
+    String maxHeight = "30";
+    String response = String(binId + " " + currentHeight + " " + maxHeight + " " + volt);
+    
+    publishResponse(response);
+    delay(3000);
     }
 }
 
 void loop() {
-
   ESP.deepSleep(99999999);
-  
   }
