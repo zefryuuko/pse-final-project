@@ -5,6 +5,7 @@ const dotenv = require('dotenv');
 dotenv.config();
 const app = express();
 const mqttClient = require('./mqtt/mqtt_client');
+const influxClient = require('./db/influx_client');
 
 // Middlewares
 app.use(express.json());
