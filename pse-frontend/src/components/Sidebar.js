@@ -1,0 +1,49 @@
+
+import React from 'react';
+import {Link} from 'react-router-dom';
+
+class Sidebar extends React.Component {
+    render() {
+        return (
+            <aside className="left-sidebar" data-sidebarbg="skin6">
+                {/* <!-- Sidebar scroll--> */}
+                <div className="scroll-sidebar" data-sidebarbg="skin6">
+                    {/* <!-- Sidebar navigation--> */}
+                    <nav className="sidebar-nav">
+                        <ul id="sidebarnav">
+                            {/* Dashboard */}
+                            <li className="sidebar-item"> <Link className="sidebar-link sidebar-link" to="/"
+                                    aria-expanded="false"><i data-feather="home" className="feather-icon"></i><span
+                                        className="hide-menu">Dashboard</span></Link></li>
+                            <li className="list-divider"></li>
+
+                            {/* Course Administration */}
+                            <li className="nav-small-cap"><span className="hide-menu">Components</span></li>
+
+                            <li className="sidebar-item"> <Link className="sidebar-link" to="/table"
+                                    aria-expanded="false"><i data-feather="edit-3" className="feather-icon"></i><span
+                                        className="hide-menu">Tables</span></Link>
+                            </li>
+                            <li className="sidebar-item"> <Link className="sidebar-link sidebar-link" to="/chart"
+                                    aria-expanded="false"><i data-feather="grid" className="feather-icon"></i><span
+                                        className="hide-menu">Charts</span></Link></li>
+                            <li className="list-divider"></li>
+
+                            <li className="nav-small-cap"><span className="hide-menu">Account</span></li>
+                            <li className="sidebar-item"> <Link className="sidebar-link sidebar-link" to="/profile"
+                                    aria-expanded="false"><i data-feather="user" className="feather-icon"></i><span
+                                        className="hide-menu">Profile</span></Link></li>
+                            <li className="sidebar-item"> <Link className="sidebar-link sidebar-link" to="/logout"
+                                    aria-expanded="false"><i data-feather="log-out" className="feather-icon"></i><span
+                                        className="hide-menu">Logout</span></Link></li>
+                        </ul>
+                    </nav>
+                    {/* <!-- End Sidebar navigation --> */}
+                </div>
+                {/* <!-- End Sidebar scroll--> */}
+            </aside>
+        );
+    }
+}
+
+export default Sidebar;
