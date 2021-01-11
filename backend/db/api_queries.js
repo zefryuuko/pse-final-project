@@ -5,7 +5,7 @@ class ApiQueries {
         try {
             const result = await db.query(
                 'SELECT DISTINCT hardware_id FROM trash_data\
-                 WHERE ID NOT IN (SELECT hardware_id FROM trashcan_metadata)'  
+                 WHERE hardware_id NOT IN (SELECT hardware_id FROM trashcan_metadata)'  
             );
             console.log(result);
             return result;
