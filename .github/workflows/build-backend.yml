@@ -1,0 +1,36 @@
+name: Build backend image
+
+on:
+  push:
+    branches: [ master ]
+    paths:
+      - 'backend/**'
+
+jobs:
+  build-containers:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v2 
+    - uses: actions/setup-node@v1
+      with:
+        node-version: '15.5'
+       
+    - name: Docker login
+      env:
+        DOCKER_USER: ${{ secrets.DOCKER_USER }}
+        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}   
+      run: |
+         docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+    
+    # Build backend services
+    - name: Build user
+      run: |
+        docker build ./backend/ -t zefryuuko/pse-backend:latest
+    
+    # Push to Docker Hub
+    - name: Push to Docker Hub
+      run: |
+        docker push zefryuuko/pse-backend:latest
+    
+    # TODO: kickstart pull new image on host
