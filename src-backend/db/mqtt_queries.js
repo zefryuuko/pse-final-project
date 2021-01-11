@@ -18,19 +18,21 @@ class MqttQueries {
                 const currentHeight = msgSplit[1];
                 const maxHeight = msgSplit[2];
                 const batteryVoltage = msgSplit[3];
+                let currentUsage = maxHeight - currentHeight;
+                currentUsage = currentUsage >= 0 ? currentUsage : maxHeight;
                 console.log(`[MqttQueries] Received data from trash bin ${hardwareId}`);
-                this.addTrashBinData(hardwareId, currentHeight, maxHeight, batteryVoltage);
+                this.addTrashBinData(hardwareId, currentUsage, maxHeight, batteryVoltage);
                 break;
             default:
                 break;
         }
     }
 
-    addTrashBinData = async (hardwareId, currentHeight, maxHeight, batteryVoltage) => {
+    addTrashBinData = async (hardwareId, currentUsage, maxHeight, batteryVoltage) => {
         db.query(
-            'INSERT INTO trash_data (hardware_id, maximum_distance, current_distance, battery_voltage, time)\
+            'INSERT INTO trash_data (hardware_id, maximum_distance, current_usage, battery_voltage, time)\
              VALUES (?, ?, ?, ?, NOW())',
-            [hardwareId, maxHeight, currentHeight, batteryVoltage],
+            [hardwareId, maxHeight, currentUsage, batteryVoltage],
             (err, res) => {
                 if (err) throw err;
                 console.log("[MqttQueries] Data added successfully.");
