@@ -6,7 +6,7 @@ class ApiQueries {
             const result = await db.query(
                 'SELECT metadata.*, data.current_usage, data.battery_voltage FROM trashcan_metadata metadata\
                  JOIN (SELECT id, hardware_id, current_usage, battery_voltage FROM trash_data WHERE id IN (SELECT MAX(id) FROM trash_data GROUP BY hardware_id)) data\
-                 ON metadata.hardware_id = data.hardware_id'  
+                 ON metadata.hardware_id = data.hardware_id'
             );
             return result[0];
         } catch (err) {
