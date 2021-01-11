@@ -7,7 +7,7 @@
 WiFiManager wifiManager;
 
 // MQTT
-#define WLAN_SSID "BSD3"
+#define WLAN_SSID "Its mine"
 #define WLAN_PASS "wordpass"
 #define MQTT_ADDR "netherportal.zef.sh"
 #define MQTT_PORT 1883
@@ -124,7 +124,7 @@ void setup() {
 
     float finalDistance = distTotal / 5.0;  // average distances in array
     Serial.println(finalDistance);  // print out the distance
-    Serial.println(v);  // print out voltage
+    Serial.println(volt);  // print out voltage
 
     String binId = String(WiFi.hostname());
     String currentHeight = String(finalDistance);
