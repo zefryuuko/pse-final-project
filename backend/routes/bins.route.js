@@ -2,7 +2,9 @@ const express = require('express');
 const router = express.Router();
 const apiQueries = require('../db/api_queries');
 
-// router.get('/' ...)
+router.get('/', async (req, res) => {
+    
+});
 
 router.get('/unconfigured', async (req, res) => {
     try {
@@ -14,6 +16,18 @@ router.get('/unconfigured', async (req, res) => {
             "details": err
         });
     }
+});
+
+router.post('/configure', async (req, res) => {
+    // Configure new bin
+});
+
+router.get('/bin/:binId', async (req, res) => {
+    // Get bin metadata
+});
+
+router.put('/bin/:binId', async (req, res) => {
+    // Update bin metadata
 });
 
 module.exports = router;
