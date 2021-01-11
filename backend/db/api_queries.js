@@ -9,7 +9,23 @@ class ApiQueries {
             );
             return result;
         } catch (err) {
-            throw(err);
+            throw err;
+        }
+    }
+
+    addTrashCanMetadata = async (hardwareId, name, maxDistance, locationId) => {
+        try {
+            const result = await db.query(
+                'INSERT INTO trashcan_metadata (hardware_id, name, max_distance, location_id)\
+                 VALUES (?, ?, ?, ?)',
+                 [hardwareId, name, maxDistance, locationId]
+            );
+            if (result[0].affectedRows == 1) return true;
+            else return false
+            return result;
+        } catch (err) {
+            if (err.code == 'ER_DUP_ENTRY') return false;
+            throw err;
         }
     }
 }
