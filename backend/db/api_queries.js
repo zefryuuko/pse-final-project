@@ -7,7 +7,6 @@ class ApiQueries {
                 'SELECT DISTINCT hardware_id FROM trash_data\
                  WHERE hardware_id NOT IN (SELECT hardware_id FROM trashcan_metadata)'  
             );
-            console.log(result);
             return result;
         } catch (err) {
             throw(err);
