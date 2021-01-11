@@ -16,3 +16,4 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Routes
+app.use('/bins', require('./routes/bins.route'));
