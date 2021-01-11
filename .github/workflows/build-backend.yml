@@ -24,7 +24,7 @@ jobs:
          docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
     
     # Build backend services
-    - name: Build user
+    - name: Build backend
       run: |
         docker build ./backend/ -t zefryuuko/pse-backend:latest
     
