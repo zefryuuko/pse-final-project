@@ -16,6 +16,3 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Routes
-mqttClient.onMessageReceivedCallbacks.push((topic, message) => {
-    console.log(message);
-})
