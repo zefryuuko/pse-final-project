@@ -2,7 +2,7 @@ name: Build backend image
 
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
     paths:
       - 'backend/**'
 
