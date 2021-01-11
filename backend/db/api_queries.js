@@ -28,6 +28,10 @@ class ApiQueries {
         }
     }
 
+    // updateTrashCan = async (hardwareId, name, maxDistance, locationId, grafanaId) => {
+    //     try
+    // }
+
     getUnconfiguredTrashCan = async () => {
         try {
             const result = await db.query(
