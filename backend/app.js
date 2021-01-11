@@ -17,3 +17,8 @@ app.use(express.urlencoded({ extended: true }));
 
 // Routes
 app.use('/bins', require('./routes/bins.route'));
+
+// Serve
+app.listen(3000, () => {
+    console.log(`[App] Server is listening on port ${3000}`);
+});
