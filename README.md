@@ -5,9 +5,9 @@ Pervasive Software Engineering Final Project Repository
 ## Product Summary
 The smart trash management sytem allows the users to receive updates on the amount of content each trash has every time it is added. The user will get a notification on the amount of trash in the trash bin through a graphical user interface web application. With the help of an open-sourced multi-dimensional visualization web application called Grafana, users will be able to view the analytics and statistics of the trash bin through a graph and attractive visualization. This helps ensure that user can manage the efficiency of workload and manpower needed to do trash control.
 
-This may be beneficial for offices, malls, festivals, or even public facilities such as the road, pedestrian walking, train stations, airports, and others. Eradicating the need to send people to do a roll in checking each of the trash container and rather using this efficient system to check for trends and to minimize resources. With these analytics, users can find trash hotspot location, the time of day trash is most often added, and others. Furthermore, the investment needed to implement this system is low. There are only a few IoT devices and a computer.
+This may be beneficial for offices, malls, festivals, or even public facilities such as the road, pedestrian walking, train stations, airports, and others. Eradicating the need to send people to do a roll in checking each of the trash container and rather using this efficient system to check for trends and to minimize resources. With these analytics, users can find trash hotspot location, the time of day trash is most often added, and others. Furthermore, the investment needed to implement this system is low. There are only a few components and a computer.
 
-The IoT devices are:
+The components used are:
 1. HC-SR04 Ultrasonic Sensor (Rp 12.000,00)
 2. Reed switch (Rp 2.000,00)
 3. Wemos D1 Mini ESP8266 module (Rp 35.000,00)
