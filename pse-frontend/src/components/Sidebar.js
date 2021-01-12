@@ -20,9 +20,9 @@ class Sidebar extends React.Component {
                             {/* Course Administration */}
                             <li className="nav-small-cap"><span className="hide-menu">Components</span></li>
 
-                            <li className="sidebar-item"> <Link className="sidebar-link" to="/table"
+                            <li className="sidebar-item"> <Link className="sidebar-link" to="/trash-bin"
                                     aria-expanded="false"><i data-feather="edit-3" className="feather-icon"></i><span
-                                        className="hide-menu">Tables</span></Link>
+                                        className="hide-menu">Trash Bin</span></Link>
                             </li>
                             <li className="sidebar-item"> <Link className="sidebar-link sidebar-link" to="/chart"
                                     aria-expanded="false"><i data-feather="grid" className="feather-icon"></i><span

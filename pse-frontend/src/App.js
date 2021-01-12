@@ -10,12 +10,12 @@ function App() {
   return (
     <BrowserRouter>
         {/* Index */}
-        <Route exact path="/" component={Index}/>
+        <Route path="/" component={Index}/>
         
         {/* Login */}
         {/* <Route exact path="/login" component={Login}/> */}
 
-      </BrowserRouter>
+    </BrowserRouter>
   );
 }
 

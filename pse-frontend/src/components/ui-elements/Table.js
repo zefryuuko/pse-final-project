@@ -5,17 +5,25 @@ class Table extends Component {
         return (
             <div className="table-responsive">
                 <table className="table">
-                    {this.props.header ?
-                        <thead className="bg-primary text-white">
-                            <tr>
-                                {this.props.header.map(col => {
-                                    return <th key={col}>{col}</th>
-                                })}
-                            </tr>
-                        </thead>
-                    : null}
+                    <thead className="bg-primary text-white">
+                        <tr>
+                            <th>Name</th>
+                            <th>Usage percentage</th>
+                            <th>Battery</th>
+                        </tr>
+                    </thead>
                     <tbody>
-                        {this.props.children}
+                        {this.props.data.map((col, index) => {
+                            return (
+                                <React.Fragment>
+                                    <tr>
+                                        <td>{col.name}</td>
+                                        <td>{parseInt((col.current_usage/col.max_distance)*100)}%</td>
+                                        <td>{parseInt((col.battery_voltage/4.2)*100)}%</td>
+                                    </tr>
+                                </React.Fragment>
+                            )
+                        })}
                     </tbody>
                 </table>
             </div>

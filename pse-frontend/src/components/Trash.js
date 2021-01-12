@@ -1,5 +1,7 @@
 import React from 'react';
 
+import axios from 'axios';
+
 // UI Elements
 import PageWrapper from './ui-elements/PageWrapper';
 import PageBreadcrumb from './ui-elements/PageBreadcrumb';
@@ -7,8 +9,9 @@ import ContentWrapper from './ui-elements/ContentWrapper';
 import Breadcrumb from './ui-elements/Breadcrumb';
 import Card from './ui-elements/Card';
 import Preloader from './ui-elements/Preloader';
+import Table from './ui-elements/Table';
 
-class Dashboard extends React.Component {
+class Trash extends React.Component {
     constructor() {
         super();
         this.state = {
@@ -20,6 +23,27 @@ class Dashboard extends React.Component {
             userLastName: "",
             accountDetails: undefined,
             currentEnrolledSemester: undefined,
+            // data: [
+            //     {
+            //       "hardware_id": "ESP-TEST00",
+            //       "name": "Test Can 0",
+            //       "max_distance": 20,
+            //       "location_id": 1,
+            //       "grafana_id": null,
+            //       "current_usage": 3,
+            //       "battery_voltage": 3.2
+            //     },
+            //     {
+            //       "hardware_id": "ESP-TEST01",
+            //       "name": "Test Can 1",
+            //       "max_distance": 30,
+            //       "location_id": 1,
+            //       "grafana_id": null,
+            //       "current_usage": 1,
+            //       "battery_voltage": 4.2
+            //     }
+            //   ]
+            data: undefined
         }
 
         // Set page display mode when loading
@@ -28,11 +52,18 @@ class Dashboard extends React.Component {
     }
     
     componentDidMount() {
-        
+        axios.get(`https://pse-api.zef.sh/bins`)
+        .then(res => {
+            // console.log(res.data)
+            const data = res.data;
+            this.setState({ data });
+        })
     }
     
     render() {
         // if (!this.state.isAuthenticated && !this.state.isAuthenticating) return <Redirect to="/logout"/>
+        if (!this.state.data) return null
+        else
         return (
             <div>
                 <Preloader isLoading={this.state.isLoading}/>
@@ -40,8 +71,11 @@ class Dashboard extends React.Component {
                     <PageWrapper>
                         <PageBreadcrumb title={`Welcome Back, ${this.state.userFirstName}!`} breadcrumb={<Breadcrumb current="Dashboard"/>}/>
                         <ContentWrapper>
-                            <Card title="Trash statistic" padding style={{height: '70vh'}}>
+                            <Card title="Trash table" padding style={{height: '70vh'}}>
                                 <div className="list-group">
+                                    <Table data={this.state.data}>
+
+                                    </Table>
                                     {/* {this.state.currentEnrolledSemester ?
                                         this.state.currentEnrolledSemester.classes.map((element, index) => {
                                             return <Link to={`/lecturer/courses/${this.state.currentEnrolledSemester._id}/${element.classCode}/${element.courseCode}`} key={index} className="list-group-item">
@@ -53,7 +87,6 @@ class Dashboard extends React.Component {
                                         })
                                     : <div style={{textAlign: "center"}}>No data</div>} */}
                                 </div>
-                                <iframe src="https://grafana.zef.sh/d-solo/C_BqmQ-Gk/dashboard?orgId=1&theme=light&panelId=2" style={{width: '100%', height: '60vh'}} frameBorder="0"></iframe>
                             </Card>
                         </ContentWrapper>
                     </PageWrapper>
@@ -63,4 +96,4 @@ class Dashboard extends React.Component {
     }
 }
 
-export default Dashboard;
+export default Trash;

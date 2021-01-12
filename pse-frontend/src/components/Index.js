@@ -12,6 +12,7 @@ import Footer from './Footer';
 
 // Course Administration
 import Dashboard from './Dashboard';
+import Trash from './Trash';
 
 class Index extends Component {
     constructor() {
@@ -40,7 +41,10 @@ class Index extends Component {
                 <div style={this.state.isLoading ? this.loadingStyle : this.loadedStyle}>
                     <Navbar />
                     <Sidebar />
-                    <Route exact path="/"><Dashboard/></Route>
+                    <Switch>
+                        <Route exact path="/"><Dashboard/></Route>
+                        <Route exact path="/trash-bin"><Trash/></Route>
+                    </Switch>
                     <PageWrapper><Footer/></PageWrapper>
                 </div>
             </MainWrapper>
