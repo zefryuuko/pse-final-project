@@ -2,6 +2,8 @@
 
 Pervasive Software Engineering Final Project Repository
 
+![Build backend image](https://github.com/zefryuuko/pse-final-project/workflows/Build%20backend%20image/badge.svg?branch=main)
+
 ## Product Summary
 The smart trash management sytem allows the users to receive updates on the amount of content each trash has every time it is added. The user will get a notification on the amount of trash in the trash bin through a graphical user interface web application. With the help of an open-sourced multi-dimensional visualization web application called Grafana, users will be able to view the analytics and statistics of the trash bin through a graph and attractive visualization. This helps ensure that user can manage the efficiency of workload and manpower needed to do trash control.
 
