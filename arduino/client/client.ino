@@ -7,7 +7,7 @@
 WiFiManager wifiManager;
 
 // MQTTaaa
-#define WLAN_SSID "Its mine"
+#define WLAN_SSID "BSD3"
 #define WLAN_PASS "wordpass"
 #define MQTT_ADDR "netherportal.zef.sh"
 #define MQTT_PORT 1883
