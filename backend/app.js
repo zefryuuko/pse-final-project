@@ -1,5 +1,6 @@
 const express = require('express');
 const dotenv = require('dotenv');
+const cors = require('cors');
 
 // Initialize modules
 dotenv.config();
@@ -14,6 +15,7 @@ const mqttQueries = new MqttQueries(mqttClient);
 // Middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cors());
 
 // Routes
 app.use('/bins', require('./routes/bins.route'));
