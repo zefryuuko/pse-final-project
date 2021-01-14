@@ -19,6 +19,7 @@ app.use(cors());
 
 // Routes
 app.use('/bins', require('./routes/bins.route'));
+app.use('/locations', require('./routes/locations.route'));
 
 // Serve
 app.listen(3000, () => {
