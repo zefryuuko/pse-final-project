@@ -71,11 +71,17 @@ class ApiQueries {
     }
 
     setTrashCanGrafanaId = async (hardwareId, grafanaId) => {
-        // TODO: implement this
-    }
-
-    updateTrashCanMetadata = async (hardwareId, name, maxDistance, locationId, grafanaId) => {
-        // TODO: implement this
+        try {
+            const result = await db.query(
+                'UPDATE trashcan_metadata SET grafana_id = ?\
+                WHERE hardware_id = ?',
+                [grafanaId, hardwareId]
+            );
+            if (result[0].affectedRows == 0) return false;
+            return true;
+        } catch (err) {
+            throw err;
+        }
     }
 }
 
