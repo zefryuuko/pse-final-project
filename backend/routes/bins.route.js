@@ -29,7 +29,35 @@ router.get('/bin/:binId', async (req, res) => {
 });
 
 router.put('/bin/:binId', async (req, res) => {
-    // Update bin metadata
+    const hardwareId = req.params.binId;
+
+    const { name, maxDistance, locationId, grafanaId } = req.body;
+    if (!(name && maxDistance && locationId)) {
+        res.status(400).json({
+            message: "Missing parameter(s)"
+        });
+        return;
+    }
+
+    try {
+        const isUpdateSuccess = await apiQueries.updateTrashCan(hardwareId, name, maxDistance, locationId, grafanaId);
+        
+        if (!isUpdateSuccess) {
+            res.send(404).json({
+                message: "Trashcan with the passed ID is not found on the system"
+            });
+            return;
+        }
+        
+        res.status(200).json({
+            message: "Trashcan updated successfully"
+        });
+    } catch (err) {
+        res.status(500).json({
+            message: "500 Internal Server Error",
+            details: err
+        });
+    }
 });
 
 router.get('/unconfigured', async (req, res) => {
