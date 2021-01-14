@@ -28,9 +28,19 @@ class ApiQueries {
         }
     }
 
-    // updateTrashCan = async (hardwareId, name, maxDistance, locationId, grafanaId) => {
-    //     try
-    // }
+    updateTrashCan = async (hardwareId, name, maxDistance, locationId, grafanaId) => {
+        try {
+            const result = await db.query(
+                'UPDATE trashcan_metadata SET name = ?, max_distance = ?, location_id = ?, grafana_id = ?\
+                WHERE hardware_id = ?',
+                [name, maxDistance, locationId, grafanaId, hardwareId]
+            );
+            if (result[0].affectedRows == 0) return false;
+            return true;
+        } catch (err) {
+            throw err;
+        }
+    }
 
     getUnconfiguredTrashCan = async () => {
         try {
@@ -61,11 +71,17 @@ class ApiQueries {
     }
 
     setTrashCanGrafanaId = async (hardwareId, grafanaId) => {
-        // TODO: implement this
-    }
-
-    updateTrashCanMetadata = async (hardwareId, name, maxDistance, locationId, grafanaId) => {
-        // TODO: implement this
+        try {
+            const result = await db.query(
+                'UPDATE trashcan_metadata SET grafana_id = ?\
+                WHERE hardware_id = ?',
+                [grafanaId, hardwareId]
+            );
+            if (result[0].affectedRows == 0) return false;
+            return true;
+        } catch (err) {
+            throw err;
+        }
     }
 }
 
