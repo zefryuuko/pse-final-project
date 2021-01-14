@@ -1,6 +1,10 @@
 const db = require('./mysql_client').client;
 
 class ApiQueries {
+    // -------------------------------
+    // Trash Can CRUD
+    // ------------------------------- 
+
     getTrashCans = async () => {
         try {
             const result = await db.query(
@@ -79,6 +83,85 @@ class ApiQueries {
             );
             if (result[0].affectedRows == 0) return false;
             return true;
+        } catch (err) {
+            throw err;
+        }
+    }
+
+    // -------------------------------
+    // Locations CRUD
+    // ------------------------------- 
+    getLocations = async () => {
+        try {
+            const result = await db.query(
+                'SELECT * from locations'
+            );
+            return result[0];
+        } catch (err) {
+            throw err;
+        }
+    }
+
+    getLocation = async (locationId) => {
+        try {
+            const result = await db.query(
+                'SELECT * FROM locations WHERE id = ?',
+                [locationId]
+            );
+            if (result[0].length > 0) return result[0][0];
+            return { message: "Location not found" };
+        } catch (err) {
+            throw err;
+        }
+    }
+
+    createLocation = async (name) => {
+        try {
+            // Make sure there are no rooms with the same name
+            const roomWithNameExists = await db.query(
+                'SELECT * FROM locations WHERE name = ?',
+                [name]
+            );
+
+            if (roomWithNameExists[0].length > 0) return false;
+
+            const result = await db.query(
+                'INSERT INTO locations (name) VALUES (?)',
+                [name]
+            );
+            return true;
+        } catch (err) {
+            throw err;
+        }
+    }
+
+    updateLocation = async (locationId, name) => {
+        try {
+            // Make sure there are no rooms with the same name
+            const roomWithNameExists = await db.query(
+                'SELECT id FROM locations WHERE name = ?',
+                [name]
+            );
+            if (roomWithNameExists[0].length > 0) return false;
+
+            const result = await db.query(
+                'UPDATE locations SET name = ? WHERE id = ?',
+                [name, locationId]
+            );
+            return true;
+        } catch (err) {
+            throw err;
+        }
+    }
+
+    deleteLocation = async(locationId) => {
+        try {
+            const deleteLocationsResult = await db.query(
+                'DELETE FROM locations WHERE id = ?',
+                [locationId]
+            );
+            if (deleteLocationsResult[0].affectedRows > 0) return true;
+            return false;
         } catch (err) {
             throw err;
         }
