@@ -20,6 +20,7 @@ The components used are:
 All those components will be placed in each of the trash containers. The total sum of money needed to create the sensor is around Rp 96.000,00. The ultrasonic sensor allows the device to measure the distance from the lid of the trash container to the trash. The reed switch triggers the device to send the distance when a trash is added by disconnecting when the lid is open and reconnecting when the lid is closed. The battery will be used to power the device. The ESP8266 module will be used to connect to the WiFi and acts as the brain of the device. The battery shield allows the batteries to be attached to the ESP8266 module. When the device is in idle, it will go to a deep sleep mode to save energy. Every time trash is added into the trash container, the ID of the trash container, the height of the trash, the max height of the trash container, and the remaining voltage of the battery.
 
 ## User Manual
+The web application portal to access admin page along with the trash statistics can be accessed from (https://pse.erizky.com)
 
 ## Video
 The video consists of the product prototype along with the manual of how to use the product with the web application user interface.
