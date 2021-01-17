@@ -38,3 +38,4 @@ The video consists of the product prototype along with the manual of how to use 
 The video can be found in the link below: 
 
 ## Poster
+![Poster](https://github.com/zefryuuko/pse-final-project/blob/main/assets/BINUSMAYA%20V%20(1).png?raw=true)
