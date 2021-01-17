@@ -26,7 +26,11 @@ When the admin opens the web application, the admin will be directed into the da
 
 ![Dashboard](https://github.com/zefryuuko/pse-final-project/blob/main/assets/Screenshot%202021-01-17%20233648.png?raw=true)
 
+![Detail Dashboard](https://github.com/zefryuuko/pse-final-project/blob/main/assets/Screenshot%202021-01-17%20233715.png?raw=true)
+
 On the right hand side of the screen houses the control panel. The admin can choose "Trash Bins" which enlists all the trash bin registered in the web application and the admin can choose the trash bins categorized in specific rooms. As the screenshot shows below, the admin can add trash bins by adding the name and location of the trash bin. The admin can also see the name of the trash bin, the amount of contents in the trash bin, and the battery percentage of the trash bin. The admin can also see how many trash bins need to be cleaned up and how many trash bins needs their battery charged or changed.
+
+![Trash Bin Details](https://github.com/zefryuuko/pse-final-project/blob/main/assets/Screenshot%202021-01-17%20233730.png?raw=true)
 
 ## Video
 The video consists of the product prototype along with the manual of how to use the product with the web application user interface.
