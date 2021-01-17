@@ -21,7 +21,6 @@ class Table extends Component {
                     </thead>
                     <tbody>
                         {this.props.data.map((col, index) => {
-                            if (parseInt(this.props.room) === 0 || parseInt(col.location_id) === parseInt(this.props.room))
                             return (
                                 <React.Fragment>
                                     <tr>
@@ -33,7 +32,6 @@ class Table extends Component {
                                                 data-toggle="modal"
                                                 data-target="#Modal"
                                                 onClick={() => this.onButtonClicked(index)}
-                                                type="button" className="btn btn-light" data-dismiss="modal" 
                                             >
                                                 Edit
                                             </button>
@@ -43,15 +41,13 @@ class Table extends Component {
                             )
                         })}
                     </tbody>
-                    {this.props.room == 0 && <button 
+                    <button 
                         data-toggle="modal"
                         data-target="#ModalCreate"
                         // onClick={() => this.onButtonClicked(index)}
-                        type="button" className="btn btn-light" data-dismiss="modal" 
                     >
                         Add
-                    </button>}
-                    
+                    </button>
                 </table>
             </div>
         );

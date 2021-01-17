@@ -14,7 +14,7 @@ import Modal from './ui-elements/Modal';
 import ModalCreate from './ui-elements/ModalCreate';
 import CardNew from './ui-elements/CardNew';
 
-class Trash extends React.Component {
+class Room extends React.Component {
     constructor() {
         super();
         this.state = {
@@ -65,7 +65,6 @@ class Trash extends React.Component {
     
     render() {
         // if (!this.state.isAuthenticated && !this.state.isAuthenticating) return <Redirect to="/logout"/>
-        
         if (!this.state.data) return null
         else
         return (
@@ -77,10 +76,10 @@ class Trash extends React.Component {
                     <PageWrapper>
                         <PageBreadcrumb title={`Welcome Back, ${this.state.userFirstName}!`} breadcrumb={<Breadcrumb current="Dashboard"/>}/>
                         <ContentWrapper>
-                            <CardNew data={this.state.data} room={0}></CardNew>
+                            <CardNew data={this.state.data} room={this.props.match.params.id}></CardNew>
                             <Card title="Trash table" padding style={{height: '70vh'}}>
                                 <div className="list-group">
-                                    <Table data={this.state.data} room={0}/>
+                                    <Table data={this.state.data} room={this.props.match.params.id}/>
                                     {/* {this.state.currentEnrolledSemester ?
                                         this.state.currentEnrolledSemester.classes.map((element, index) => {
                                             return <Link to={`/lecturer/courses/${this.state.currentEnrolledSemester._id}/${element.classCode}/${element.courseCode}`} key={index} className="list-group-item">
@@ -96,14 +95,9 @@ class Trash extends React.Component {
                         </ContentWrapper>
                     </PageWrapper>
                 </div>
-                    <script>
-                    {setTimeout(() => {
-                        window.feather.replace()
-                    }), 3000}
-                    </script>
             </div>
         );
     }
 }
 
-export default Trash;
+export default Room;
