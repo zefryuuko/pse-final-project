@@ -24,6 +24,8 @@ The web application portal to access admin page along with the trash statistics 
 
 When the admin opens the web application, the admin will be directed into the dashboard page of the web application as shown in the screenshot below. In the dashboard, the admin will be able to see the trash usage statistics in a given moment. The statistics is in a shape of a graph with the activity count of trash added against the time. The admin will be able to press on a specific time and add annotations such as description and tag.
 
+(https://github.com/zefryuuko/pse-final-project/blob/main/assets/Screenshot%202021-01-17%20233648.png?raw=true)
+
 On the right hand side of the screen houses the control panel. The admin can choose "Trash Bins" which enlists all the trash bin registered in the web application and the admin can choose the trash bins categorized in specific rooms. As the screenshot shows below, the admin can add trash bins by adding the name and location of the trash bin. The admin can also see the name of the trash bin, the amount of contents in the trash bin, and the battery percentage of the trash bin. The admin can also see how many trash bins need to be cleaned up and how many trash bins needs their battery charged or changed.
 
 ## Video
