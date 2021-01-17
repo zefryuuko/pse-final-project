@@ -20,7 +20,10 @@ class Modal extends Component {
         this.setState({
             selected: i,
             name: data.name,
-            location: data.location_id
+            distance: data.max_distance,
+            location: data.location_id,
+            grafana: data.grafana_id,
+            hardware: data.hardware_id
         }, this.forceUpdate())
     }
 
@@ -38,12 +41,12 @@ class Modal extends Component {
 
     onSaveButtonClicked = () => {
         let data = {
-            name: this.state.name ? this.state.name : JSON.parse(localStorage.getItem('data'))[parseInt(localStorage.getItem('selected'))].name, 
-            maxDistance: JSON.parse(localStorage.getItem('data'))[parseInt(localStorage.getItem('selected'))].max_distance, 
-            locationId: this.state.location ? this.state.location : JSON.parse(localStorage.getItem('data'))[parseInt(localStorage.getItem('selected'))].location_id,
-            grafanaId: JSON.parse(localStorage.getItem('data'))[parseInt(localStorage.getItem('selected'))].grafana_id
+            name: this.state.name, 
+            maxDistance: this.state.distance, 
+            locationId: this.state.location,
+            grafanaId: this.state.grafana
         }
-        axios.put(`https://pse-api.zef.sh/bins/bin/`+JSON.parse(localStorage.getItem('data'))[parseInt(localStorage.getItem('selected'))].hardware_id, data, { headers: {'Content-Type': 'application/json'} })
+        axios.put(`https://pse-api.zef.sh/bins/bin/`+this.state.hardware, data, { headers: {'Content-Type': 'application/json'} })
         .then(res => {
             window.location.reload()
         })
