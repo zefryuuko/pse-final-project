@@ -13,6 +13,7 @@ import Footer from './Footer';
 // Course Administration
 import Dashboard from './Dashboard';
 import Trash from './Trash';
+import Room from './Room';
 
 class Index extends Component {
     constructor() {
@@ -44,6 +45,7 @@ class Index extends Component {
                     <Switch>
                         <Route exact path="/"><Dashboard/></Route>
                         <Route exact path="/trash-bin"><Trash/></Route>
+                        <Route path="/room/:id" component={Room}></Route>
                     </Switch>
                     <PageWrapper><Footer/></PageWrapper>
                 </div>

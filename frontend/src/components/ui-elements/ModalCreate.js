@@ -1,32 +1,26 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import Global from '../Global';
 
-class Modal extends Component {
+class ModalCreate extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            selected: 0,
             locations: undefined
         }
-
-        Global.modal = this
 
         // Bind functions
         this.onChangeSelection = this.onChangeSelection.bind(this);
     }
 
-    onChange = (i, data) => {
-        this.setState({
-            selected: i,
-            name: data.name,
-            location: data.location_id
-        }, this.forceUpdate())
-    }
-
-    onChangeTyping = (event) => {
+    onChangeName = (event) => {
         this.setState({
             name: event.target.value
+        })
+    }
+
+    onChangeMaxDistance = (event) => {
+        this.setState({
+            maxDistance: event.target.value
         })
     }
 
@@ -36,14 +30,20 @@ class Modal extends Component {
         })
     }
 
+    onChangeSelection2 = (event) => {
+        this.setState({
+            hardware: event.target.value
+        })
+    }
+
     onSaveButtonClicked = () => {
         let data = {
-            name: this.state.name ? this.state.name : JSON.parse(localStorage.getItem('data'))[parseInt(localStorage.getItem('selected'))].name, 
-            maxDistance: JSON.parse(localStorage.getItem('data'))[parseInt(localStorage.getItem('selected'))].max_distance, 
-            locationId: this.state.location ? this.state.location : JSON.parse(localStorage.getItem('data'))[parseInt(localStorage.getItem('selected'))].location_id,
-            grafanaId: JSON.parse(localStorage.getItem('data'))[parseInt(localStorage.getItem('selected'))].grafana_id
+            hardwareId: this.state.hardware, 
+            name: this.state.name, 
+            maxDistance: this.state.maxDistance,
+            locationId: this.state.location
         }
-        axios.put(`https://pse-api.zef.sh/bins/bin/`+JSON.parse(localStorage.getItem('data'))[parseInt(localStorage.getItem('selected'))].hardware_id, data, { headers: {'Content-Type': 'application/json'} })
+        axios.post(`https://pse-api.zef.sh/bins/configure`, data)
         .then(res => {
             window.location.reload()
         })
@@ -54,14 +54,22 @@ class Modal extends Component {
         .then(res => {
             // console.log(res.data)
             const locations = res.data;
-            this.setState({ locations });
+            this.setState({ locations, location: locations[0].id });
+        })
+
+        axios.get(`https://pse-api.zef.sh/bins/unconfigured`)
+        .then(res => {
+            // console.log(res.data)
+            const unconfigured = res.data;
+            if (unconfigured.length !== 0)
+            this.setState({ unconfigured, hardware: unconfigured[0].hardware_id });
         })
     }
 
     render() { 
-        if (this.state.locations !== undefined)
+        if (this.state.locations !== undefined && this.state.unconfigured !== undefined)
         return (
-            <div id="Modal" className="modal fade" tabIndex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div id="ModalCreate" className="modal fade" tabIndex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                 <div className="modal-dialog modal-dialog-centered modal-lg" role="document">
                     <div className="modal-content">
                         <div className="modal-header">
@@ -69,14 +77,26 @@ class Modal extends Component {
                         <div className="modal-body">
                             <form>
                                 <ul className="list-group">
+                                    Hardware ID:
+                                    {
+                                        <select id="unconfigured" name="unconfigured" onChange={this.onChangeSelection2}>
+                                            {
+                                                this.state.unconfigured.map((loc, index) => {
+                                                    return <option value={loc.hardware_id}>{loc.hardware_id}</option>
+                                                })
+                                            }
+                                        </select>
+                                    }
                                     Name:
-                                    <input defaultValue={this.state.name} onChange={this.onChangeTyping}></input>
+                                    <input defaultValue={this.state.name} onChange={this.onChangeName}></input>
+                                    Max Distance:
+                                    <input defaultValue={this.state.maxDistance} onChange={this.onChangeMaxDistance} type="number"></input>
                                     Location:
                                     {
                                         <select id="location" name="location" onChange={this.onChangeSelection}>
                                             {
                                                 this.state.locations.map((loc, index) => {
-                                                    return <option value={loc.id} selected={this.state.location === loc.id ? "selected" : ""}>{loc.name}</option>
+                                                    return <option value={loc.id}>{loc.name}</option>
                                                 })
                                             }
                                         </select>
@@ -106,4 +126,4 @@ class Modal extends Component {
     }
 }
 
-export default Modal
+export default ModalCreate

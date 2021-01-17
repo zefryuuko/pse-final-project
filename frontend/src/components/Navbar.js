@@ -28,8 +28,8 @@ class Navbar extends React.Component {
                                     <img src="assets/images/icon.png" className="light-logo" alt="homepage" width="50px"/>
                                 </span> */}
                                 <span className="logo-text">
-                                    <img src="assets/images/pse-logo.png" alt="homepage" className="dark-logo" width="200px"/>
-                                    <img src="assets/images/pse-logo.png" className="light-logo" alt="homepage" width="200px"/>
+                                    <img src="/assets/images/pse-logo.png" alt="homepage" className="dark-logo" width="200px"/>
+                                    <img src="/assets/images/pse-logo.png" className="light-logo" alt="homepage" width="200px"/>
                                 </span>
                             </div>
                         </div>
@@ -81,7 +81,7 @@ class Navbar extends React.Component {
                                         backgroundRepeat: "no-repeat",
                                         backgroundPosition: "center center",
                                         backgroundSize: "cover",
-                                        backgroundImage: `url('assets/images/dump.png')`
+                                        backgroundImage: `url('/assets/images/dump.png')`
                                     }}/>
                                     <span className="ml-2 d-none d-md-inline-block"><span
                                             className="text-dark">Admin</span></span>
