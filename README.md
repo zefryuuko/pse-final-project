@@ -20,7 +20,11 @@ The components used are:
 All those components will be placed in each of the trash containers. The total sum of money needed to create the sensor is around Rp 96.000,00. The ultrasonic sensor allows the device to measure the distance from the lid of the trash container to the trash. The reed switch triggers the device to send the distance when a trash is added by disconnecting when the lid is open and reconnecting when the lid is closed. The battery will be used to power the device. The ESP8266 module will be used to connect to the WiFi and acts as the brain of the device. The battery shield allows the batteries to be attached to the ESP8266 module. When the device is in idle, it will go to a deep sleep mode to save energy. Every time trash is added into the trash container, the ID of the trash container, the height of the trash, the max height of the trash container, and the remaining voltage of the battery.
 
 ## User Manual
-The web application portal to access admin page along with the trash statistics can be accessed from https://pse.erizky.com
+The web application portal to access admin page along with the trash statistics can be accessed from https://pse.zef.sh
+
+When the admin opens the web application, the admin will be directed into the dashboard page of the web application as shown in the screenshot below. In the dashboard, the admin will be able to see the trash usage statistics in a given moment. The statistics is in a shape of a graph with the activity count of trash added against the time. The admin will be able to press on a specific time and add annotations such as description and tag.
+
+On the right hand side of the screen houses the control panel. The admin can choose "Trash Bins" which enlists all the trash bin registered in the web application and the admin can choose the trash bins categorized in specific rooms. As the screenshot shows below, the admin can add trash bins by adding the name and location of the trash bin. The admin can also see the name of the trash bin, the amount of contents in the trash bin, and the battery percentage of the trash bin. The admin can also see how many trash bins need to be cleaned up and how many trash bins needs their battery charged or changed.
 
 ## Video
 The video consists of the product prototype along with the manual of how to use the product with the web application user interface.
