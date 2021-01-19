@@ -21,7 +21,33 @@ The components used are:
 All those components will be placed in each of the trash containers. The total sum of money needed to create the sensor is around Rp 96.000,00. The ultrasonic sensor allows the device to measure the distance from the lid of the trash container to the trash. The reed switch triggers the device to send the distance when a trash is added by disconnecting when the lid is open and reconnecting when the lid is closed. The battery will be used to power the device. The ESP8266 module will be used to connect to the WiFi and acts as the brain of the device. The battery shield allows the batteries to be attached to the ESP8266 module. When the device is in idle, it will go to a deep sleep mode to save energy. Every time trash is added into the trash container, the ID of the trash container, the height of the trash, the max height of the trash container, and the remaining voltage of the battery.
 
 ## User Manual
-The web application portal to access admin page along with the trash statistics can be accessed from https://pse.zef.sh
+To host and run the application, there are several things that you have to setup and modify.
+
+### Web Application
+Before you can run the applications, you need to have several dependencies set up. The requirements are as follows:
+- Docker
+- MariaDB/MySQL
+- Mosquitto Broker
+- Grafana
+
+With all of the dependencies set up, you can use the prebuilt container `zefryuuko/pse-backend:latest` available on the Docker Hub. You need to expose the port `3000` from the container to access it from outsite the container, or use reverse proxy software such as traefik or nginx. In addition, you also need to add the following environment variables:
+- MariaDB/MySQL configuration: `MYSQL_HOST`, `MYSQL_USER`, `MYSQL_PASS`, `MYSQL_DB_NAME`, `MYSQL_POOL_SIZE`
+- Mosquitto: `MQTT_ADDRESS`, `MQTT_TRASH_DATA_RECEIVE_TOPIC`
+
+With the backend in place, you can deploy the frontend of this project by first changing the API endpoint to your backend hostname, build the Docker container, then deploy the application.
+
+### ESP8266
+You can flash the software available on the `arduino` folder with the Arduino IDE. Before you compile and upload the software, you need to change several variables. - `WLAN_SSID`: The WiFi name that the ESP8266 will connect to
+- `WLAN_PASS`: The password of the WiFi
+- `MQTT_ADDR`: The hostname of the MQTT broker
+- `MQTT_PORT`: The port of the MQTT broker
+
+You can also change the MQTT topic that the ESP8266 will publish to on this section:
+ ```
+ Adafruit_MQTT_Publish socket1Pub = Adafruit_MQTT_Publish(&mqtt, "MQTT_TOPIC_HERE");
+ ```
+ 
+### Using the app
 
 When the admin opens the web application, the admin will be directed into the dashboard page of the web application as shown in the screenshot below. In the dashboard, the admin will be able to see the trash usage statistics in a given moment. The statistics is in a shape of a graph with the activity count of trash added against the time. The admin will be able to press on a specific time and add annotations such as description and tag.
 
